@@ -53,6 +53,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import uk.org.whoami.geoip.GeoIPLookup;
 import uk.org.whoami.geoip.GeoIPTools;
 
+//PlayerPoints Import
+import org.black_ixx.playerpoints.PlayerPoints;
+
 
 //Listener Class
 public class MCDocsListener implements Listener {
@@ -949,7 +952,50 @@ public class MCDocsListener implements Listener {
 		}
 		return line;
 	}
+			//iConomy
+			if(MCDocs.economyEnabled){
+				try{
+					fixedLine = fixedLine.replace("%balance", Double.toString(MCDocs.economy.getBalance(player.getName())));
+				}
+				catch(Exception e){
+					logit("Warning: Vault could not find " + player.getName() + "'s balance.");
+				}
+			}   
+	private PlayerPoints playerPoints;
 	
+	/**
+	 * Validate that we have access to PlayerPoints
+	 *
+	 * @return True if we have PlayerPoints, else false.
+	 */
+	private boolean hookPlayerPoints() {
+	    final Plugin plugin = this.getServer().getPluginManager().getPlugin("PlayerPoints");
+	    playerPoints = PlayerPoints.class.cast(plugin);
+	    return playerPoints != null; 
+	}
+	
+	/**
+	 * Accessor for other parts of your plugin to retrieve PlayerPoints.
+	 *
+	 * @return PlayerPoints plugin instance
+	 */
+	public PlayerPoints getPlayerPoints() {
+	    return playerPoints;
+	}
+	public class PlayerPointsVariables {
+	
+	public static String replaceVariables(String string, Player player) {
+		String newString = string;
+		PlayerPointsAPI pp = ((PlayerPoints) Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints")).getAPI();
+		
+		if (newString.contains("<playerpoints>"))
+			newString = newString.replaceAll("<playerpoints>", String.valueOf(pp.look(player.getUniqueId())));
+		
+		return newString;
+	}
+}
+
+
 	private String locationSwap(Player player, String line){
 		
 		if (this.plugin.getServer().getPluginManager().getPlugin("GeoIPTools") != null) {
