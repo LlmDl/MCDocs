@@ -54,7 +54,7 @@ import uk.org.whoami.geoip.GeoIPLookup;
 import uk.org.whoami.geoip.GeoIPTools;
 
 //PlayerPoints Import
-import org.black_ixx.playerpoints.PlayerPoints;
+import com.tazzernator.bukkit.mcdocs.VariablePlayerPoints;
 
 
 //Listener Class
@@ -491,6 +491,8 @@ public class MCDocsListener implements Listener {
 					}
 				}
 			}
+			
+			fixedLine = fixedLine.replace("%playerpoints", Double.toString(VariblePlayerPoints.playerpoints.getAPI().look("Player")));
 			
 			//iConomy
 			if(MCDocs.economyEnabled){
