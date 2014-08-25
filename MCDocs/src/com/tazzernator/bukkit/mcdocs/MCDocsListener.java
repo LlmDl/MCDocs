@@ -53,6 +53,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import uk.org.whoami.geoip.GeoIPLookup;
 import uk.org.whoami.geoip.GeoIPTools;
 
+//PlayerPloints Import
+import com.tazzernator.bukkit.mcdocs.VariablePlayerPoints;
 
 //Listener Class
 public class MCDocsListener implements Listener {
@@ -488,6 +490,8 @@ public class MCDocsListener implements Listener {
 					}
 				}
 			}
+			//PlayerPoints
+			fixedLine = fixedLine.replace("%playerpoints", Double.toString(VariablePlayerPoints.playerpoints.getAPI().look("Player")));
 			
 			//iConomy
 			if(MCDocs.economyEnabled){
