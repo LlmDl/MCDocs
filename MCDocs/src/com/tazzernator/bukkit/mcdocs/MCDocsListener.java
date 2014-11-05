@@ -491,7 +491,7 @@ public class MCDocsListener implements Listener {
 				}
 			}
 			//PlayerPoints
-			fixedLine = fixedLine.replace("%playerpoints", Double.toString(VariablePlayerPoints.playerpoints.getAPI().look("Player")));
+			fixedLine = fixedLine.replace("%playerpoints", Int.toString(VariablePlayerPoints.playerpoints.getAPI().look("Player")));
 			
 			//iConomy
 			if(MCDocs.economyEnabled){
