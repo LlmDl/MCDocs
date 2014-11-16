@@ -36,7 +36,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+
+import org.black_ixx.playerpoints.PlayerPoints;
 //Bukkit Imports
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -49,12 +52,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
+
 //GeoIPTools Import
 import uk.org.whoami.geoip.GeoIPLookup;
 import uk.org.whoami.geoip.GeoIPTools;
 
+
 //PlayerPloints Import
-import com.tazzernator.bukkit.mcdocs.VariablePlayerPoints;
+import org.black_ixx.playerpoints.PlayerPoints;
+
 
 //Listener Class
 public class MCDocsListener implements Listener {
@@ -84,6 +90,9 @@ public class MCDocsListener implements Listener {
 	private boolean playerBroadcastMessageEnabled = true;
 	private int cacheTime = 5;
 	
+	private PlayerPoints playerPoints;
+
+	
 	/*
 	 * -- Constructor for MCDocsListener --
 	 * All we do here is import the instance.
@@ -91,6 +100,14 @@ public class MCDocsListener implements Listener {
 	
 	public MCDocsListener(MCDocs instance) {
 		this.plugin = instance;
+		
+	hookPlayerPoints();
+	}
+	
+	private boolean hookPlayerPoints() {
+		final Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints");
+		playerPoints = PlayerPoints.class.cast(plugin);
+		return playerPoints != null;
 	}
 	
 	
@@ -490,8 +507,22 @@ public class MCDocsListener implements Listener {
 					}
 				}
 			}
+
 			//PlayerPoints
-			fixedLine = fixedLine.replace("%playerpoints", Int.toString(VariablePlayerPoints.playerpoints.getAPI().look("Player")));
+			
+			fixedLine = fixedLine.replace("%playerpoints", Integer.toString(playerPoints.getAPI().look("Player")));
+			
+
+			//fixedLine = fixedLine.replace("%playerpoints", Integer.toString(VariablePlayerPoints.getPoints(player)));
+			
+		    /* if(MCDocs.playerpointsEnabled){
+				try{
+					fixedLine = fixedLine.replace("%playerpoints", Integer.toString(MCDocs.testp.getAPI().look("Player")));
+				}
+				catch(Exception e){
+					logit("Warning: PlayerPoints could not find " + player.getName() + "'s balance.");
+				}
+			}   */
 			
 			//iConomy
 			if(MCDocs.economyEnabled){

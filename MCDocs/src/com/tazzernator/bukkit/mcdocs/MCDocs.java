@@ -54,7 +54,7 @@ public class MCDocs extends JavaPlugin {
 	public static Boolean economyEnabled = false;
 	  
 	//Listener, Logger, Config.
-	private final MCDocsUtil playerListener = new MCDocsUtil(this);
+	private final MCDocsListener playerListener = new MCDocsListener(this);
 	public static final Logger log = Logger.getLogger("Minecraft");
 	FileConfiguration config;	
 	
