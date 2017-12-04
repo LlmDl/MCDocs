@@ -30,6 +30,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
@@ -37,7 +38,8 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 
-import org.black_ixx.playerpoints.PlayerPoints;
+
+//import org.black_ixx.playerpoints.PlayerPoints;
 //Bukkit Imports
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -54,12 +56,12 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 
 //GeoIPTools Import
-import uk.org.whoami.geoip.GeoIPLookup;
-import uk.org.whoami.geoip.GeoIPTools;
+//import uk.org.whoami.geoip.GeoIPLookup;
+//import uk.org.whoami.geoip.GeoIPTools;
 
 
 //PlayerPloints Import
-import org.black_ixx.playerpoints.PlayerPoints;
+//import org.black_ixx.playerpoints.PlayerPoints;
 
 
 //Listener Class
@@ -68,7 +70,7 @@ public class MCDocsListener implements Listener {
 	//Some Variables for the class.
 	private MCDocs plugin;
 	FileConfiguration config;
-	static GeoIPLookup geoIP = null;
+	//static GeoIPLookup geoIP = null;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private ArrayList<String> fixedLines = new ArrayList<String>();
 	
@@ -90,7 +92,7 @@ public class MCDocsListener implements Listener {
 	private boolean playerBroadcastMessageEnabled = true;
 	private int cacheTime = 5;
 	
-	private PlayerPoints playerPoints;
+	//private PlayerPoints playerPoints;
 
 	
 	/*
@@ -101,14 +103,14 @@ public class MCDocsListener implements Listener {
 	public MCDocsListener(MCDocs instance) {
 		this.plugin = instance;
 		
-	hookPlayerPoints();
+	//hookPlayerPoints();
 	}
 	
-	private boolean hookPlayerPoints() {
-		final Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints");
-		playerPoints = PlayerPoints.class.cast(plugin);
-		return playerPoints != null;
-	}
+//	private boolean hookPlayerPoints() {
+//		final Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints");
+//		playerPoints = PlayerPoints.class.cast(plugin);
+//		return playerPoints != null;
+//	}
 	
 	
 	/*
@@ -510,7 +512,7 @@ public class MCDocsListener implements Listener {
 
 			//PlayerPoints
 			
-			fixedLine = fixedLine.replace("%playerpoints", Integer.toString(playerPoints.getAPI().look("Player")));
+			//fixedLine = fixedLine.replace("%playerpoints", Integer.toString(playerPoints.getAPI().look("Player")));
 			
 
 			//fixedLine = fixedLine.replace("%playerpoints", Integer.toString(VariablePlayerPoints.getPoints(player)));
@@ -855,7 +857,7 @@ public class MCDocsListener implements Listener {
 	}
 	
 	private String onlineNames(){
-		Player online[] = plugin.getServer().getOnlinePlayers();
+		Collection<? extends Player> online = plugin.getServer().getOnlinePlayers();
 		String onlineNames = null;
 		String nameFinal = null;
 		for (Player o : online){
@@ -881,7 +883,7 @@ public class MCDocsListener implements Listener {
 	}
 
 	private String onlineGroup(String group){
-		Player online[] = plugin.getServer().getOnlinePlayers();
+		Collection<? extends Player> online = plugin.getServer().getOnlinePlayers();
 		String onlineGroup = null;
 		String nameFinal = null;
 		for (Player o : online){
@@ -910,8 +912,8 @@ public class MCDocsListener implements Listener {
 	}
 	
 	private String onlineCount(){
-		Player online[] = plugin.getServer().getOnlinePlayers();
-		int onlineCount = online.length;
+		Collection<? extends Player> online = plugin.getServer().getOnlinePlayers();
+		int onlineCount = online.size();
 		return Integer.toString(onlineCount);
 	}	
 	
@@ -988,13 +990,13 @@ public class MCDocsListener implements Listener {
 	private String locationSwap(Player player, String line){
 		
 		if (this.plugin.getServer().getPluginManager().getPlugin("GeoIPTools") != null) {
-			Plugin GeoIPTools = this.plugin.getServer().getPluginManager().getPlugin("GeoIPTools");
-			geoIP = ((GeoIPTools) GeoIPTools).getGeoIPLookup();
+//			Plugin GeoIPTools = this.plugin.getServer().getPluginManager().getPlugin("GeoIPTools");
+//			geoIP = ((GeoIPTools) GeoIPTools).getGeoIPLookup();
 			
 			String country = "";
 			
 			try{
-				country = geoIP.getCountry(player.getAddress().getAddress()).getName();
+//				country = geoIP.getCountry(player.getAddress().getAddress()).getName();
 			}
 			catch(Exception e){
 				logit("GeoIPTools has thrown an exception. Perhaps update it?");
