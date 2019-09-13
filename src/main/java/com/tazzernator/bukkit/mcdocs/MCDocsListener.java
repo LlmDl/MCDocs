@@ -37,8 +37,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-
-
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -525,7 +524,7 @@ public class MCDocsListener implements Listener {
 			//iConomy
 			if(MCDocs.economyEnabled){
 				try{
-					fixedLine = fixedLine.replace("%balance", Double.toString(MCDocs.economy.getBalance(player.getName())));
+					fixedLine = fixedLine.replace("%balance", Double.toString(MCDocs.economy.getBalance(Bukkit.getOfflinePlayer(player.getUniqueId()))));
 				}
 				catch(Exception e){
 					logit("Warning: Vault could not find " + player.getName() + "'s balance.");
