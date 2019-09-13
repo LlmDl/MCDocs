@@ -1,6 +1,7 @@
 name: MCDocs
 main: com.tazzernator.bukkit.mcdocs.MCDocs
 version: 14.4
+api-version: 1.14
 description: Powerful Documentation and MOTD Plugin. Show information from a file or online using a command that you define.
 author: Tazzernator (Andrew Tajsic)
 website: http://dev.bukkit.org/server-mods/mcdocs/

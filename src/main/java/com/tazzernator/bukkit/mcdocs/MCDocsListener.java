@@ -39,9 +39,6 @@ import java.util.logging.Logger;
 
 
 
-//import org.black_ixx.playerpoints.PlayerPoints;
-//Bukkit Imports
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -51,7 +48,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 
@@ -825,7 +821,7 @@ public class MCDocsListener implements Listener {
 		string = (this.plugin.getServer().getIp() != null) ? string.replace("%server_ip", this.plugin.getServer().getIp()) : string;
 		string = (Integer.toString(this.plugin.getServer().getPort()) != null) ? string.replace("%server_port", Integer.toString(this.plugin.getServer().getPort())) : string;
 		string = (Integer.toString(this.plugin.getServer().getMaxPlayers()) != null) ? string.replace("%server_max", Integer.toString(this.plugin.getServer().getMaxPlayers())) : string;
-		string = (this.plugin.getServer().getServerName() != null) ? string.replace("%server_name", this.plugin.getServer().getServerName()) : string;		
+		string = (this.plugin.getServer().getName() != null) ? string.replace("%server_name", this.plugin.getServer().getName()) : string;		
 		
 		return string;
 	}
